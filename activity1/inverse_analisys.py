@@ -1,7 +1,7 @@
 # Ranges: 1k, 10k, 20k, 50k, 70k
 from random import randint
 from time import time
-from matplotlib import pyplot as frame
+from matplotlib import pyplot as chart
 
 def insertion_sort(lista):
 	for i in range(1, len(lista)):
@@ -53,13 +53,13 @@ times_bubble = []
 times_insertion = []
 times_selection = []
 
-# Execução dos algoritmos utilizando vetores randômicos
+# Execução dos algoritmos utilizando vetores ordenados inversamente
 for value in values:
 	# Execução do buuble sort
 	average = 0
 	for i in range(3):
 		initial = time()
-		bubble_sort(get_vector(value, 'r'))
+		bubble_sort(get_vector(value, 'i'))
 		average += time() - initial
 		print('{a} - Iteration #{b} from bubble finished.'.format(a = value, b = i))
 	average /= 3
@@ -70,7 +70,7 @@ for value in values:
 	average = 0
 	for i in range(3):
 		initial = time()
-		insertion_sort(get_vector(value, 'r'))
+		insertion_sort(get_vector(value, 'i'))
 		average += time() - initial
 		print('{a} - Iteration #{b} from insertion finished.'.format(a = value, b = i))
 	average /= 3
@@ -81,7 +81,7 @@ for value in values:
 	average = 0
 	for i in range(3):
 		initial = time()
-		selection_sort(get_vector(value, 'r'))
+		selection_sort(get_vector(value, 'i'))
 		average += time() - initial
 		print('{a} - Iteration #{b} from selection finished.'.format(a = value, b = i))
 	average /= 3
@@ -90,39 +90,45 @@ for value in values:
 
 # Mostrar gráficos
 # Bubble sort
-frame.title('Bubble sort')
-frame.plot(values, times_bubble, color = 'red')
-frame.xlabel('Tamanho da entrada')
-frame.ylabel('Tempo médio')
-frame.savefig('bubble.png')
-frame.show()
+chart.title('Bubble sort')
+chart.plot(values, times_bubble, color = 'red')
+chart.xlabel('Tamanho da entrada')
+chart.ylabel('Tempo médio')
+chart.grid(True)
+chart.savefig('bubble.png')
+chart.show()
 
 # Insertion sort
-frame.title('Insertion sort')
-frame.plot(values, times_insertion, color = 'blue')
-frame.xlabel('Tamanho da entrada')
-frame.ylabel('Tempo médio')
-frame.savefig('insertion.png')
-frame.show()
+chart.title('Insertion sort')
+chart.plot(values, times_insertion, color = 'blue')
+chart.xlabel('Tamanho da entrada')
+chart.ylabel('Tempo médio')
+chart.grid(True)
+chart.savefig('insertion.png')
+chart.show()
 
 # Selection sort
-frame.title('Selection sort')
-frame.plot(values, times_selection, color = 'black')
-frame.xlabel('Tamanho da entrada')
-frame.ylabel('Tempo médio')
-frame.savefig('selection.png')
-frame.show()
+chart.title('Selection sort')
+chart.plot(values, times_selection, color = 'black')
+chart.xlabel('Tamanho da entrada')
+chart.ylabel('Tempo médio')
+chart.grid(True)
+chart.savefig('selection.png')
+chart.show()
 
 # Joining
-frame.title('Algoritmos de ordenação')
-frame.plot(values, times_bubble, color = 'red', label = 'Bubble sort')
-frame.plot(values, times_insertion, color = 'blue', label = 'Insertion sort')
-frame.plot(values, times_selection, color = 'black', label = 'Selection sort')
-frame.xlabel('Tamanho da entrada')
-frame.ylabel('Tempo médio')
-frame.legend(loc='best')
-frame.savefig('join.png')
-frame.show()
+chart.title('Algoritmos de ordenação')
+chart.plot(values, times_bubble, color = 'red', label = 'Bubble sort')
+chart.plot(values, times_insertion, color = 'blue', label = 'Insertion sort')
+chart.plot(values, times_selection, marker = 'o', color = 'black', label = 'Selection sort')
+chart.xlabel('Tamanho da entrada')
+chart.ylabel('Tempo médio')
+chart.grid(True)
+chart.legend(loc='best')
+chart.xlim(0,10000)
+chart.ylim(0,5)
+chart.savefig('join.png')
+chart.show()
 
 # Escrevendo dados em arquivo
 file = open('data.txt', 'w')
